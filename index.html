@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Screenshot App</title>
+</head>
+<body>
+  <h1>Screenshot App</h1>
+  <button id="start">Start Capture</button>
+  <button id="stop">Stop Capture</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const startButton = document.getElementById('start');
+      const stopButton = document.getElementById('stop');
+
+      if (window.ipcRenderer) {
+        if (startButton) {
+          startButton.addEventListener('click', () => {
+            window.ipcRenderer.send('start-capture');
+          });
+        }
+
+        if (stopButton) {
+          stopButton.addEventListener('click', () => {
+            window.ipcRenderer.send('stop-capture');
+          });
+        }
+      } else {
+        console.error('ipcRenderer is not available');
+      }
+    });
+  </script>
+</body>
+</html>
